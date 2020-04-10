@@ -1,4 +1,5 @@
 import threading
+import random
 import socket
 from time import sleep
 
@@ -37,10 +38,11 @@ def start():
         else:
             print("Attempt: " + str(attempt_counter + 1) +
                   "     Message Number: " + str(message_number))
-                  
+
         res = Response()
 
         message = "ping message number " + str(message_number)
+
         s.sendall(message.encode())
         offload_task(res)
         sleep(1)
@@ -50,12 +52,21 @@ def start():
             message_number = message_number + 1
             attempt_counter = 0
         else:
+            time = calculate_time(attempt_counter)
+            print("\nDelaying for " + str(time) + " seconds")
+            sleep(time)
             attempt_counter = attempt_counter + 1
 
 
 def offload_task(res):
     th = threading.Thread(target=task, args=(res,))
     th.start()
+
+
+def calculate_time(num):
+    if num == 0:
+        return 0
+    return random.randrange(0, num + 1, 1)
 
 
 start()

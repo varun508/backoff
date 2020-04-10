@@ -47,6 +47,8 @@ def start(calculate_time):
             print("\nDelaying for " + str(time) + " seconds")
             sleep(time)
             attempt_counter = attempt_counter + 1
+    
+    calculate_average()
 
 
 def offload_task(res):

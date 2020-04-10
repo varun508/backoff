@@ -2,6 +2,7 @@ import random
 from time import sleep
 from socket import *
 
+
 BUSY_PERCENT = 50
 SERVER_PORT = 12345
 
